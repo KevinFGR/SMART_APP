@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:smart_app/details/details_view.dart';
 import 'package:smart_app/login/login_view.dart';
 
 class AppWidget extends StatelessWidget{
@@ -15,7 +14,7 @@ class AppWidget extends StatelessWidget{
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue[800]!),
         useMaterial3: true,
       ),
-      home: const DetailsPage()
+      home: const LoginPage()
     );
   }
 }
