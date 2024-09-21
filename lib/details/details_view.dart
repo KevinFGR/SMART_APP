@@ -49,6 +49,7 @@ class _DetailsPageState extends State<DetailsPage>{
                   ),
                 ),
                 const SizedBox(height:30),
+                
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -75,6 +76,7 @@ class _DetailsPageState extends State<DetailsPage>{
                   ),
                 ),
                 const SizedBox(height:8),
+
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -101,6 +103,7 @@ class _DetailsPageState extends State<DetailsPage>{
                   ),
                 ),
                 const SizedBox(height:8),
+
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -126,6 +129,7 @@ class _DetailsPageState extends State<DetailsPage>{
                   ),
                 ),
                 const SizedBox(height:8),
+
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -151,6 +155,7 @@ class _DetailsPageState extends State<DetailsPage>{
                   ),
                 ),
                 const SizedBox(height:8),
+                
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -176,6 +181,7 @@ class _DetailsPageState extends State<DetailsPage>{
                   ),
                 ),
                 const SizedBox(height:8),
+
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -201,6 +207,114 @@ class _DetailsPageState extends State<DetailsPage>{
                   ),
                 ),
                 const SizedBox(height:8),
+
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'CEP',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 5),
+                const CupertinoTextField(
+                  keyboardType: TextInputType.number,
+                  padding: EdgeInsets.all(10),
+                  placeholder: "DIGITE AQUI...",
+                  placeholderStyle: TextStyle(color:Colors.black38, fontSize:14),
+                  style: TextStyle(color: Colors.black, fontSize: 14),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(7),
+                    ),
+                  ),
+                ),
+                const SizedBox(height:8),
+                
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Endereço',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 5),
+                const CupertinoTextField(
+                  padding: EdgeInsets.all(10),
+                  placeholder: "DIGITE AQUI...",
+                  placeholderStyle: TextStyle(color:Colors.black38, fontSize:14),
+                  style: TextStyle(color: Colors.black, fontSize: 14),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(7),
+                    ),
+                  ),
+                ),
+                const SizedBox(height:8),
+
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Número',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 5),
+                const CupertinoTextField(
+                  keyboardType: TextInputType.number,
+                  padding: EdgeInsets.all(10),
+                  placeholder: "DIGITE AQUI...",
+                  placeholderStyle: TextStyle(color:Colors.black38, fontSize:14),
+                  style: TextStyle(color: Colors.black, fontSize: 14),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(7),
+                    ),
+                  ),
+                ),
+                const SizedBox(height:8),
+
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Número',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 5),
+                const CupertinoTextField(
+                  keyboardType: TextInputType.number,
+                  padding: EdgeInsets.all(10),
+                  placeholder: "DIGITE AQUI...",
+                  placeholderStyle: TextStyle(color:Colors.black38, fontSize:14),
+                  style: TextStyle(color: Colors.black, fontSize: 14),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(7),
+                    ),
+                  ),
+                ),
+                const SizedBox(height:8),
+
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -237,6 +351,7 @@ class _DetailsPageState extends State<DetailsPage>{
                     },
                   ),
                 ),
+                
                 const SizedBox(height:30),
                 SizedBox(
                   width: double.infinity,
