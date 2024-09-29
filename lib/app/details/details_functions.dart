@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smart_app/list/list_view.dart';
+import 'package:smart_app/app/list/list_view.dart';
 
 class DetailsFunctions {
   static List<String> ufs(){

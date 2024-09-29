@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:smart_app/details/details_functions.dart';
+import 'package:smart_app/app/details/details_functions.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 
 class DetailsPage extends StatefulWidget{

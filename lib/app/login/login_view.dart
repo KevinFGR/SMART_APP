@@ -2,8 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'login_functions.dart';
 
-class LoginPage extends StatelessWidget{
+class LoginPage extends StatefulWidget{
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPage();
+}
+
+class _LoginPage extends State<LoginPage>{
+  final emailController = TextEditingController();
+  final passController = TextEditingController();
 
   @override
   Widget build(BuildContext context){
@@ -41,6 +49,8 @@ class LoginPage extends StatelessWidget{
               ),
             ),
             const SizedBox(height:65),
+
+            // Email
             const Align(
               alignment: Alignment.centerLeft,
               child: Text(
@@ -53,12 +63,14 @@ class LoginPage extends StatelessWidget{
               ),
             ),
             const SizedBox(height: 5),
-            const CupertinoTextField(
-              padding: EdgeInsets.all(10),
+            CupertinoTextField(
+              padding: const EdgeInsets.all(10),
+              controller: emailController,
+              keyboardType: TextInputType.emailAddress,
               placeholder: "email@email.com",
-              placeholderStyle: TextStyle(color:Colors.white70, fontSize:14),
-              style: TextStyle(color: Colors.white, fontSize: 14),
-              decoration: BoxDecoration(
+              placeholderStyle: const TextStyle(color:Colors.white70, fontSize:14),
+              style: const TextStyle(color: Colors.white, fontSize: 14),
+              decoration: const BoxDecoration(
                 color: Colors.black12,
                 borderRadius: BorderRadius.all(
                   Radius.circular(7),
@@ -66,6 +78,8 @@ class LoginPage extends StatelessWidget{
               ),
             ),
             const SizedBox(height:8),
+
+            // Senha
             const Align(
               alignment: Alignment.centerLeft,
               child: Text(
@@ -78,13 +92,14 @@ class LoginPage extends StatelessWidget{
               ),
             ),
             const SizedBox(height: 5),
-            const CupertinoTextField(
+            CupertinoTextField(
               obscureText: true,
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
+              controller: passController,
               placeholder: "********",
-              placeholderStyle: TextStyle(color:Colors.white70, fontSize:14),
-              style: TextStyle(color: Colors.white, fontSize: 14),
-              decoration: BoxDecoration(
+              placeholderStyle: const TextStyle(color:Colors.white70, fontSize:14),
+              style: const TextStyle(color: Colors.white, fontSize: 14),
+              decoration: const BoxDecoration(
                 color: Colors.black12,
                 borderRadius: BorderRadius.all(
                   Radius.circular(7),
@@ -92,6 +107,8 @@ class LoginPage extends StatelessWidget{
               ),
             ),
             const SizedBox(height:30),
+
+            // Acessar
             SizedBox(
               width: double.infinity,
               child: CupertinoButton(
@@ -103,7 +120,8 @@ class LoginPage extends StatelessWidget{
                   "Acessar",
                   style:TextStyle(color: Colors.white70, fontSize: 14, fontWeight: FontWeight.w600)
                   ),
-                onPressed: (){ LoginFunctions.navigateToListPage(context); }
+                // onPressed: (){ LoginFunctions.navigateToListPage(context); }
+                onPressed: (){ LoginFunctions.auth( emailController.text, passController.text ); }
               ),
             ),
           ],
