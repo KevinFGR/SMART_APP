@@ -10,6 +10,14 @@ class DetailsFunctions {
     ];
     return ufs;
   }
+
+  static List<DropdownMenuItem<String>> segments(){
+    return  [
+      const DropdownMenuItem<String>( value: "technology", child: Text("TECNOLOGIA") ),
+      const DropdownMenuItem<String>( value: "construction", child: Text("CONSTRUÇÃO") ),
+    ];
+  }
+  
   static void navigateToListPage(BuildContext context) {
     Navigator.push(
       context,

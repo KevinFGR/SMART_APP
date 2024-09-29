@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:smart_app/details/details_functions.dart';
+import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 
 class DetailsPage extends StatefulWidget{
   const DetailsPage({super.key});
@@ -11,8 +13,12 @@ class DetailsPage extends StatefulWidget{
 
 class _DetailsPageState extends State<DetailsPage>{
   final  _form = GlobalKey<FormState>();
+  final MaskedTextController documentController = MaskedTextController( mask: "00.000.000/0000-00" );
+  final corporateNameController = TextEditingController();
+  final tradeNameController = TextEditingController();
   final emailController = TextEditingController();
-  String? selectedUf;
+  final storeController = TextEditingController();
+  String? selectedSegment;
 
   @override
   Widget build(BuildContext context){
@@ -29,6 +35,7 @@ class _DetailsPageState extends State<DetailsPage>{
         ),
         ),
         elevation: 0,
+        scrolledUnderElevation : 0,
         backgroundColor: Colors.white,
       ),
       body: Container(
@@ -49,7 +56,97 @@ class _DetailsPageState extends State<DetailsPage>{
                   ),
                 ),
                 const SizedBox(height:30),
+
+                // CNPJ
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'CNPJ',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 5),
+                CupertinoTextField(
+                  keyboardType: TextInputType.number,
+                  controller: documentController, 
+                  padding: const EdgeInsets.all(10),
+                  placeholder: "00.000.000/0000-00",
+                  placeholderStyle: const TextStyle(color:Colors.black38, fontSize:14),
+                  style: const TextStyle(color: Colors.black, fontSize: 14),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(7),
+                    ),
+                  ),
+                ),
+                const SizedBox(height:8),
+
+                // Razão Social
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Razão Social',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 5),
+                CupertinoTextField(
+                  padding: const EdgeInsets.all(10),
+                  controller: corporateNameController,
+                  placeholder: "DIGITE AQUI...",
+                  placeholderStyle: const TextStyle(color:Colors.black38, fontSize:14),
+                  inputFormatters: [
+                    LengthLimitingTextInputFormatter(100),
+                  ],
+                  style: const TextStyle(color: Colors.black, fontSize: 14),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(7),
+                    ),
+                  ),
+                ),
+                const SizedBox(height:8),
+
+                // Nome Fantasia
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Nome Fantasia',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 5),
+                CupertinoTextField(
+                  padding: const EdgeInsets.all(10),
+                  controller: tradeNameController,
+                  placeholder: "DIGITE AQUI...",
+                  placeholderStyle: const TextStyle(color:Colors.black38, fontSize:14),
+                  inputFormatters: [ LengthLimitingTextInputFormatter(50) ],
+                  style: const TextStyle(color: Colors.black, fontSize: 14),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(7),
+                    ),
+                  ),
+                ),
+                const SizedBox(height:8),
                 
+                // Email
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -67,6 +164,7 @@ class _DetailsPageState extends State<DetailsPage>{
                   keyboardType: TextInputType.emailAddress,
                   placeholder: "email@email.com",
                   placeholderStyle: const TextStyle(color:Colors.black38, fontSize:14),
+                  inputFormatters: [ LengthLimitingTextInputFormatter(100) ],
                   style: const TextStyle(color: Colors.black, fontSize: 14),
                   decoration: const BoxDecoration(
                     color: Colors.white,
@@ -77,248 +175,11 @@ class _DetailsPageState extends State<DetailsPage>{
                 ),
                 const SizedBox(height:8),
 
+                // Segmento
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'CNPJ',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 5),
-                const CupertinoTextField(
-                  keyboardType: TextInputType.number,
-                  padding: EdgeInsets.all(10),
-                  placeholder: "00.000.000/0000-00",
-                  placeholderStyle: TextStyle(color:Colors.black38, fontSize:14),
-                  style: TextStyle(color: Colors.black, fontSize: 14),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(7),
-                    ),
-                  ),
-                ),
-                const SizedBox(height:8),
-
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Razão Social',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 5),
-                const CupertinoTextField(
-                  padding: EdgeInsets.all(10),
-                  placeholder: "DIGITE AQUI...",
-                  placeholderStyle: TextStyle(color:Colors.black38, fontSize:14),
-                  style: TextStyle(color: Colors.black, fontSize: 14),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(7),
-                    ),
-                  ),
-                ),
-                const SizedBox(height:8),
-
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Nome Fantasia',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 5),
-                const CupertinoTextField(
-                  padding: EdgeInsets.all(10),
-                  placeholder: "DIGITE AQUI...",
-                  placeholderStyle: TextStyle(color:Colors.black38, fontSize:14),
-                  style: TextStyle(color: Colors.black, fontSize: 14),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(7),
-                    ),
-                  ),
-                ),
-                const SizedBox(height:8),
-                
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Nome Fantasia',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 5),
-                const CupertinoTextField(
-                  padding: EdgeInsets.all(10),
-                  placeholder: "DIGITE AQUI...",
-                  placeholderStyle: TextStyle(color:Colors.black38, fontSize:14),
-                  style: TextStyle(color: Colors.black, fontSize: 14),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(7),
-                    ),
-                  ),
-                ),
-                const SizedBox(height:8),
-
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Nome Fantasia',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 5),
-                const CupertinoTextField(
-                  padding: EdgeInsets.all(10),
-                  placeholder: "DIGITE AQUI...",
-                  placeholderStyle: TextStyle(color:Colors.black38, fontSize:14),
-                  style: TextStyle(color: Colors.black, fontSize: 14),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(7),
-                    ),
-                  ),
-                ),
-                const SizedBox(height:8),
-
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'CEP',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 5),
-                const CupertinoTextField(
-                  keyboardType: TextInputType.number,
-                  padding: EdgeInsets.all(10),
-                  placeholder: "DIGITE AQUI...",
-                  placeholderStyle: TextStyle(color:Colors.black38, fontSize:14),
-                  style: TextStyle(color: Colors.black, fontSize: 14),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(7),
-                    ),
-                  ),
-                ),
-                const SizedBox(height:8),
-                
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Endereço',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 5),
-                const CupertinoTextField(
-                  padding: EdgeInsets.all(10),
-                  placeholder: "DIGITE AQUI...",
-                  placeholderStyle: TextStyle(color:Colors.black38, fontSize:14),
-                  style: TextStyle(color: Colors.black, fontSize: 14),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(7),
-                    ),
-                  ),
-                ),
-                const SizedBox(height:8),
-
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Número',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 5),
-                const CupertinoTextField(
-                  keyboardType: TextInputType.number,
-                  padding: EdgeInsets.all(10),
-                  placeholder: "DIGITE AQUI...",
-                  placeholderStyle: TextStyle(color:Colors.black38, fontSize:14),
-                  style: TextStyle(color: Colors.black, fontSize: 14),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(7),
-                    ),
-                  ),
-                ),
-                const SizedBox(height:8),
-
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Número',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 5),
-                const CupertinoTextField(
-                  keyboardType: TextInputType.number,
-                  padding: EdgeInsets.all(10),
-                  placeholder: "DIGITE AQUI...",
-                  placeholderStyle: TextStyle(color:Colors.black38, fontSize:14),
-                  style: TextStyle(color: Colors.black, fontSize: 14),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(7),
-                    ),
-                  ),
-                ),
-                const SizedBox(height:8),
-
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'UF',
+                    'Segmento',
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 16,
@@ -335,22 +196,47 @@ class _DetailsPageState extends State<DetailsPage>{
                     ),
                   ),
                   child: DropdownButton<String>(
-                    value: selectedUf,
-                    hint: const Text("UF"),
+                    dropdownColor: Colors.white,
                     isExpanded: true,
-                    items: DetailsFunctions.ufs().map((String uf) {
-                      return DropdownMenuItem<String>(
-                        value: uf,
-                        child: Text(uf),
-                      );
-                    }).toList(),
+                    value: selectedSegment,
+                    hint: const Text("Segmento"),
+                    items: DetailsFunctions.segments(),
                     onChanged: (String? newValue) {
                       setState(() {
-                        selectedUf = newValue;
+                        selectedSegment = newValue;
                       });
                     },
                   ),
                 ),
+                
+                // Loja
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Loja',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 5),
+                CupertinoTextField(
+                  padding: const EdgeInsets.all(10),
+                  controller: storeController,
+                  keyboardType: TextInputType.number,
+                  placeholder: "00",
+                  placeholderStyle: const TextStyle(color:Colors.black38, fontSize:14),
+                  inputFormatters: [ LengthLimitingTextInputFormatter(2) ],
+                  style: const TextStyle(color: Colors.black, fontSize: 14),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(7),
+                    ),
+                  ),
+                ),
+                const SizedBox(height:8),
                 
                 const SizedBox(height:30),
                 SizedBox(
@@ -365,8 +251,12 @@ class _DetailsPageState extends State<DetailsPage>{
                       style:TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600)
                       ),
                     onPressed: () {
+                      print(documentController.value);
+                      print(tradeNameController.text);
+                      print(corporateNameController.text);
                       print(emailController.text);
-                      print(selectedUf);
+                      print(selectedSegment);
+                      print(storeController.text);
                     },
                     ),
                 ),

@@ -79,6 +79,7 @@ class LoginPage extends StatelessWidget{
             ),
             const SizedBox(height: 5),
             const CupertinoTextField(
+              obscureText: true,
               padding: EdgeInsets.all(10),
               placeholder: "********",
               placeholderStyle: TextStyle(color:Colors.white70, fontSize:14),
