@@ -11,7 +11,7 @@ class ListFunctions {
   }
 
   static void navigateToDetailsPage(BuildContext context) async {
-    Navigator.pushReplacement( context,MaterialPageRoute(builder: (context) => const DetailsPage()),);
+    Navigator.push( context,MaterialPageRoute(builder: (context) => const DetailsPage()),);
   }
 
 }

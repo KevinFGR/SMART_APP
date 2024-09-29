@@ -25,6 +25,7 @@ class _DetailsPageState extends State<DetailsPage>{
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        automaticallyImplyLeading :false,
         title: Center(
           child: FractionallySizedBox(
           widthFactor: 0.4, 
@@ -239,26 +240,52 @@ class _DetailsPageState extends State<DetailsPage>{
                 const SizedBox(height:8),
                 
                 const SizedBox(height:30),
-                SizedBox(
-                  width: double.infinity,
-                  child: CupertinoButton(
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(30),
-                    ),
-                    color: Colors.lightBlue[800],
-                    child: const Text(
-                      "Salvar",
-                      style:TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600)
+                Row(
+                  children: [
+                    Expanded(
+                      // width: double.tryParse(source),
+                      child: CupertinoButton(
+                        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0), 
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(30),
+                        ),
+                        color: Colors.blue[50],
+                        child: const Text(
+                          "Cancelar",
+                          style:TextStyle(color: Colors.black87, fontSize: 14, fontWeight: FontWeight.w600)
+                          ),
+                        onPressed: () { DetailsFunctions.navigateToListPage(context); },
                       ),
-                    onPressed: () {
-                      print(documentController.value);
-                      print(tradeNameController.text);
-                      print(corporateNameController.text);
-                      print(emailController.text);
-                      print(selectedSegment);
-                      print(storeController.text);
-                    },
                     ),
+
+                    const SizedBox(width: 20),
+              
+                    Expanded(
+                      // width: double.infinity,
+                      child: CupertinoButton(
+                        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0), 
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(30),
+                        ),
+                        color: Colors.lightBlue[800],
+                        child: const Text(
+                          "Salvar",
+                          style:TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600)
+                          ),
+                        onPressed: () async {
+                          await DetailsFunctions.insert(
+                            documentController.text,
+                            tradeNameController.text,
+                            corporateNameController.text,
+                            emailController.text,
+                            selectedSegment ?? "",
+                            storeController.text
+                           );
+                        },
+                      ),
+                ),
+              
+                  ],
                 ),
               ],
             ),

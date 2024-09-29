@@ -18,7 +18,6 @@ class LoginFunctions {
     };
     var authService =  AuthService();
     var res = await authService.auth(body);
-    print(res);
     if(res['data'] != null) { return true; }
     else { return false; }
   }
@@ -33,6 +32,7 @@ class LoginFunctions {
     var authService =  AuthService();
     var res = await authService.mfaAuth(body);
     if(res['data'] != null){
+      print(res);
       var token = res["data"]["token"];
       await TokenService.setToken(token);
       return true;

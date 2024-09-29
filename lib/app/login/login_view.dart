@@ -180,6 +180,14 @@ class _LoginPage extends State<LoginPage>{
                 }
               ),
             ),
+            const SizedBox(height: 30),
+            const Text(
+              "Esqueceu a senha?", 
+              style: TextStyle(
+                color: Colors.white60,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,)
+              )
             ],
 
             // MFA

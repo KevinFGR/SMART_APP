@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smart_app/app/list/list_view.dart';
+import 'package:smart_app/services/customers_service.dart';
 
 class DetailsFunctions {
   static List<String> ufs(){
@@ -19,10 +19,29 @@ class DetailsFunctions {
   }
   
   static void navigateToListPage(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const ListPage()),
-    );
+    Navigator.pop(context);
+  }
+
+  static Future<bool> insert(String document, String corporateName, String tradeName, String email, String segment, String store) async {
+      
+    final Map<String, dynamic> body = {
+      'company': "01",
+      'branch': "01",
+      'personType': "j",
+      'document': document.replaceAll("/","").replaceAll("-","").replaceAll(".","").replaceAll(" ",""),
+      'corporateName': corporateName,
+      'tradeName': tradeName,
+      'email': email,
+      'attributesObj': {
+        'segment': "segment"
+      } as dynamic,
+      'store': store,
+    };
+    var customerService =  CustomerService();
+    var res = await customerService.insert(body);
+    print(res);
+    if(res['data'] != null) { return true; }
+    else { return false; }
   }
 
 }
