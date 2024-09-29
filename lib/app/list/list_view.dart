@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_app/app/list/list_functions.dart';
 
 class ListPage extends StatelessWidget{
   const ListPage({super.key});
@@ -105,10 +106,29 @@ class ListPage extends StatelessWidget{
                 ),
                 color: Colors.lightBlue[800],
                 child: const Text(
-                  "Acessar",
+                  "Adicionar",
                   style:TextStyle(color: Colors.white70, fontSize: 14, fontWeight: FontWeight.w600)
                   ),
-                onPressed: () {},
+                onPressed: () {
+                  ListFunctions.navigateToDetailsPage(context);
+                },
+                ),
+            ),
+            const SizedBox(height:30),
+            SizedBox(
+              width: double.infinity,
+              child: CupertinoButton(
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(30),
+                ),
+                color: Colors.lightBlue[800],
+                child: const Text(
+                  "Logout",
+                  style:TextStyle(color: Colors.white70, fontSize: 14, fontWeight: FontWeight.w600)
+                  ),
+                onPressed: () {
+                  ListFunctions.logout(context);
+                },
                 ),
             ),
           ],
