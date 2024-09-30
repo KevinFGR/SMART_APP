@@ -273,14 +273,15 @@ class _DetailsPageState extends State<DetailsPage>{
                           style:TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600)
                           ),
                         onPressed: () async {
-                          await DetailsFunctions.insert(
-                            documentController.text,
-                            tradeNameController.text,
-                            corporateNameController.text,
-                            emailController.text,
-                            selectedSegment ?? "",
-                            storeController.text
-                           );
+                          await DetailsFunctions.getEmployer(documentController.text);
+                          // await DetailsFunctions.insert(
+                          //   documentController.text,
+                          //   tradeNameController.text,
+                          //   corporateNameController.text,
+                          //   emailController.text,
+                          //   selectedSegment ?? "",
+                          //   storeController.text
+                          //  );
                         },
                       ),
                 ),

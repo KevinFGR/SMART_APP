@@ -245,6 +245,7 @@ class _LoginPage extends State<LoginPage>{
                     );
                     if(res){
                       print('res = true');
+                      // ignore: use_build_context_synchronously
                       LoginFunctions.navigateToListPage(context);
                       }
                     else{}

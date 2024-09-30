@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_app/services/customers_service.dart';
+import 'package:smart_app/services/employers_service.dart';
 
 class DetailsFunctions {
   static List<String> ufs(){
@@ -34,14 +35,19 @@ class DetailsFunctions {
       'email': email,
       'attributesObj': {
         'segment': "segment"
-      } as dynamic,
+      },
       'store': store,
     };
     var customerService =  CustomerService();
     var res = await customerService.insert(body);
-    print(res);
     if(res['data'] != null) { return true; }
     else { return false; }
   }
 
+  static Future getEmployer(String document) async {
+    print(document);
+    var  employersService =  EmployersService();
+    var res =  await employersService.getEmployer(document);
+    print(res);
+  }
 }
