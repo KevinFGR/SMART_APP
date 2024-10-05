@@ -13,10 +13,23 @@ class Spinner {
       child: Container(
         color: const Color.fromARGB(190, 0, 57, 103),
         child: Center(
-          child: SpinKitRipple(
-            color: color,
-            size: 50.0,
-          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center, 
+            children: [
+            SpinKitRipple(
+              color: color,
+              size: 50.0,
+            ),
+            const Text("Carregando, Aguarde ...",
+            style: TextStyle(
+              color:Colors.white,
+              fontSize:15,
+              fontWeight: FontWeight.bold,
+              decoration: TextDecoration.none
+            ),)
+
+            ],
+          )
         ),
       ),
     );

@@ -34,45 +34,46 @@ class _DetailsPageState extends State<DetailsPage>{
     super.dispose();
   }
 
-  void _checkLength() {
-    if (documentController.text.length > 17) {
+  Future _checkLength() async {
+    if(documentController.text.length > 17) {
       setState(() { loading = true; });
-
-      // Chame a função desejada aqui
-      onLengthReached();
+      List<String> res = await DetailsFunctions.getEmployer(documentController.text);
+      if(res.length > 1){
+        corporateNameController.text = res[0];
+        tradeNameController.text = res[1];
+        emailController.text = res[2];
+      }
+      setState(() { loading = false; });
     }
-  }
-
-  void onLengthReached() {
-    // Lógica a ser executada quando o comprimento for igual a 14
-    print('O comprimento do input é 14. Valor: ${documentController.text}');
   }
 
   @override
   Widget build(BuildContext context){
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        automaticallyImplyLeading :false,
-        title: Center(
-          child: FractionallySizedBox(
-          widthFactor: 0.4, 
-          child: Image.asset(
-            'assets/logo.png',
-            fit: BoxFit.contain,
+    return SizedBox(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      child: Stack(
+        children: [ 
+          Scaffold(
+          extendBodyBehindAppBar: true,
+          appBar: AppBar(
+            automaticallyImplyLeading :false,
+            title: Center(
+              child: FractionallySizedBox(
+              widthFactor: 0.4, 
+              child: Image.asset(
+                'assets/logo.png',
+                fit: BoxFit.contain,
+              ),
+            ),
+            ),
+            elevation: 0,
+            scrolledUnderElevation : 0,
+            backgroundColor: Colors.white,
           ),
-        ),
-        ),
-        elevation: 0,
-        scrolledUnderElevation : 0,
-        backgroundColor: Colors.white,
-      ),
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: Stack(
-          children: [
-            SingleChildScrollView(
+          body: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: SingleChildScrollView(
               padding: const EdgeInsets.all(27),
               child: Form(
                 key: _form,
@@ -231,7 +232,7 @@ class _DetailsPageState extends State<DetailsPage>{
                         dropdownColor: Colors.white,
                         isExpanded: true,
                         value: selectedSegment,
-                        hint: const Text("Segmento"),
+                        hint: const Text("SELECIONE..."),
                         items: DetailsFunctions.segments(),
                         onChanged: (String? newValue) {
                           setState(() {
@@ -323,10 +324,11 @@ class _DetailsPageState extends State<DetailsPage>{
                 ),
               ),
             ),
-            if(loading) ...{Spinner.showSpinner(Colors.blue)}
-          ]
+          ),
         ),
-      ),
+        if(loading) ...{Spinner.showSpinner(Colors.blue)}
+      ]
+      )
     );
   }
 }

@@ -44,10 +44,22 @@ class DetailsFunctions {
     else { return false; }
   }
 
-  static Future getEmployer(String document) async {
-    print(document);
+  static Future<List<String>> getEmployer(String document) async {
+    try{
+
     var  employersService =  EmployersService();
     var res =  await employersService.getEmployer(document);
-    print(res);
+    if(res['data'].containsKey('code')){
+      return ["CNPJ não encontrado."];
+    }
+    else{
+      String tradeName =  res['data']['alias'] ?? res['data']['name'];
+      return [ 
+        res['data']['name'],
+        tradeName,
+        res['data']['email'],
+      ];
+    }
+    } catch(ex){return ["Erro ao buscar por CNPJ."]; }
   }
 }

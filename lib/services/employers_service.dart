@@ -12,7 +12,6 @@ class EmployersService{
     final res = await client.get(Uri.parse(API_URL+document), headers: {
       'Authorization': 'Bearer $token',
     });
-    print(res.statusCode);
     if(res.statusCode == 200 || res.statusCode == 400 || res.statusCode == 401){
       return jsonDecode(res.body);
     }
