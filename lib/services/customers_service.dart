@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:smart_app/services/auth_service.dart';
 import 'package:smart_app/services/token_service.dart';
 
 import 'package:http/http.dart' as http;
@@ -16,6 +17,7 @@ class CustomerService{
       'Content-Type': 'application/json', 
       'Authorization': 'Bearer $token',
     });
+    if(res.statusCode == 401){ return null; }
     return jsonDecode(res.body);
   }
 }

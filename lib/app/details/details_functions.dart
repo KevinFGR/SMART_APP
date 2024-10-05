@@ -34,7 +34,9 @@ class DetailsFunctions {
       'tradeName': tradeName,
       'email': email,
       'attributesObj': {
-        'segment': 'segment'
+        'parameters':{
+          'segment': segment
+        }
       },
       'store': store,
     };

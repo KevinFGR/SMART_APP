@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_app/app/list/list_functions.dart';
+import 'package:smart_app/services/auth_service.dart';
 
 class ListPage extends StatelessWidget{
   const ListPage({super.key});
@@ -127,7 +128,7 @@ class ListPage extends StatelessWidget{
                   style:TextStyle(color: Colors.white70, fontSize: 14, fontWeight: FontWeight.w600)
                   ),
                 onPressed: () {
-                  ListFunctions.logout(context);
+                  AuthService.logout(context);
                 },
                 ),
             ),
