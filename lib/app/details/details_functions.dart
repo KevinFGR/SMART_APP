@@ -26,20 +26,21 @@ class DetailsFunctions {
   static Future<bool> insert(String document, String corporateName, String tradeName, String email, String segment, String store) async {
       
     final Map<String, dynamic> body = {
-      'company': "01",
-      'branch': "01",
-      'personType': "j",
+      'company': '01',
+      'branch': '01',
+      'personType': 'j',
       'document': document.replaceAll("/","").replaceAll("-","").replaceAll(".","").replaceAll(" ",""),
       'corporateName': corporateName,
       'tradeName': tradeName,
       'email': email,
       'attributesObj': {
-        'segment': "segment"
+        'segment': 'segment'
       },
       'store': store,
     };
     var customerService =  CustomerService();
     var res = await customerService.insert(body);
+    print(res);
     if(res['data'] != null) { return true; }
     else { return false; }
   }
@@ -53,13 +54,14 @@ class DetailsFunctions {
       return ["CNPJ não encontrado."];
     }
     else{
-      String tradeName =  res['data']['alias'] ?? res['data']['name'];
-      return [ 
-        res['data']['name'],
-        tradeName,
-        res['data']['email'],
-      ];
+      String corporateName = res['data']['name'] ?? "";
+      String tradeName =  res['data']['alias'] ?? corporateName;
+      String email = res['data']['email'] ?? "";
+      return [ corporateName, tradeName, email ];
     }
-    } catch(ex){return ["Erro ao buscar por CNPJ."]; }
+    } catch(ex){
+      print(ex);
+      return ["Erro ao buscar por CNPJ."]; 
+      }
   }
 }
