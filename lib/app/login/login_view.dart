@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_app/app/components/spinner.dart';
 import 'login_functions.dart';
 
 class LoginPage extends StatefulWidget{
@@ -10,6 +11,7 @@ class LoginPage extends StatefulWidget{
 }
 
 class _LoginPage extends State<LoginPage>{
+  bool loading = false;
   bool mfaVerification = false;
   final emailController = TextEditingController();
   final passController = TextEditingController();
@@ -101,7 +103,7 @@ class _LoginPage extends State<LoginPage>{
             ),
             const SizedBox(height:65),
 
-            if(!mfaVerification) ...[
+            if(!mfaVerification && !loading) ...[
               // Email
               const Align(
                 alignment: Alignment.centerLeft,
@@ -175,8 +177,12 @@ class _LoginPage extends State<LoginPage>{
                   ),
                 // onPressed: (){ LoginFunctions.navigateToListPage(context); }
                 onPressed: () async  { 
+                  setState(() { loading = true; });
                   var res =  await LoginFunctions.auth( emailController.text, passController.text );
-                  setState(() { mfaVerification = res; });
+                  setState(() { 
+                    mfaVerification = res; 
+                    loading = false; 
+                  });
                 }
               ),
             ),
@@ -191,7 +197,7 @@ class _LoginPage extends State<LoginPage>{
             ],
 
             // MFA
-            if(mfaVerification) ...[
+            if(mfaVerification && !loading) ...[
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -233,6 +239,7 @@ class _LoginPage extends State<LoginPage>{
                     style:TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600)
                     ),
                   onPressed: ()async { 
+                    setState(() { loading = true; });
                     bool res = await LoginFunctions.mfaAuth( 
                       emailController.text, 
                       passController.text,
@@ -244,15 +251,19 @@ class _LoginPage extends State<LoginPage>{
                       mfa6Controller.text,
                     );
                     if(res){
-                      print('res = true');
                       // ignore: use_build_context_synchronously
                       LoginFunctions.navigateToListPage(context);
-                      }
+                    }
                     else{}
+                    setState(() { loading = false; });
                   }
                 ),
               ),
             ],
+          
+            if(loading) ...{
+              Spinner.showSpinner(Colors.cyan[100])
+            }
           ],
         ),
       ),
