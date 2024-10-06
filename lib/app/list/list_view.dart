@@ -49,6 +49,7 @@ class ListPage extends StatelessWidget{
               ),
             ),
             const SizedBox(height:65),
+
             const Align(
               alignment: Alignment.centerLeft,
               child: Text(
@@ -74,6 +75,7 @@ class ListPage extends StatelessWidget{
               ),
             ),
             const SizedBox(height:8),
+
             const Align(
               alignment: Alignment.centerLeft,
               child: Text(
@@ -99,6 +101,7 @@ class ListPage extends StatelessWidget{
               ),
             ),
             const SizedBox(height:30),
+            
             SizedBox(
               width: double.infinity,
               child: CupertinoButton(

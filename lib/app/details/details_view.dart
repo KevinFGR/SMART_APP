@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:smart_app/app/components/spinner.dart';
+import 'package:smart_app/app/components/toaster.dart';
 import 'package:smart_app/app/details/details_functions.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 
@@ -26,6 +27,7 @@ class _DetailsPageState extends State<DetailsPage>{
   @override
   void initState() {
     super.initState();
+    storeController.text ="01";
     documentController.addListener(_checkLength);
   }
 
@@ -43,8 +45,8 @@ class _DetailsPageState extends State<DetailsPage>{
         corporateNameController.text = res[0];
         tradeNameController.text = res[1];
         emailController.text = res[2];
+        stateRegistrationController.text = res[3];
       }
-      print(res);
       setState(() { loading = false; });
     }
   }
@@ -335,7 +337,8 @@ class _DetailsPageState extends State<DetailsPage>{
                               style:TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600)
                               ),
                             onPressed: () async {
-                              await DetailsFunctions.insert(
+                              setState(() { loading = true; });
+                              String? res = await DetailsFunctions.insert(
                                 documentController.text,
                                 tradeNameController.text,
                                 corporateNameController.text,
@@ -343,6 +346,13 @@ class _DetailsPageState extends State<DetailsPage>{
                                 selectedSegment ?? "",
                                 storeController.text
                                );
+                               if(res != null){ Toaster.show(res, "warning"); }
+                               // ignore: use_build_context_synchronously
+                               else{ 
+                                DetailsFunctions.navigateToListPage(context);
+                                Toaster.show("Cliente criado com sucesso.", "success"); 
+                                }
+                              setState(() { loading = false; });
                             },
                           ),
                     ),

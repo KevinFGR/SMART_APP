@@ -11,15 +11,19 @@ class CustomerService{
     return await client.get(Uri.parse(API_URL));
   }
   Future insert(Map<String, dynamic> data) async {
-    String? token = await TokenService.getToken();
-    var requestBody = jsonEncode(data);
-    final res =  await client.post(Uri.parse(API_URL), body:requestBody, headers: {
-      'Content-Type': 'application/json', 
-      'Authorization': 'Bearer $token',
-    });
-    if(res.statusCode > 200){ 
-      return null; 
+    try{
+      String? token = await TokenService.getToken();
+      var requestBody = jsonEncode(data);
+      final res =  await client.post(Uri.parse(API_URL), body:requestBody, headers: {
+        'Content-Type': 'application/json', 
+        'Authorization': 'Bearer $token',
+      });
+      return jsonDecode(res.body);
+    }catch(ex){
+      return {
+        'data': null,
+        'message': "não foi possível salvar cliente"
+      };
     }
-    return jsonDecode(res.body);
   }
 }

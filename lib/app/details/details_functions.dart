@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:smart_app/app/components/toaster.dart';
 import 'package:smart_app/services/customers_service.dart';
 import 'package:smart_app/services/employers_service.dart';
 
 class DetailsFunctions {
+
   static List<String> ufs(){
     List<String> ufs = [
       'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 
@@ -24,7 +24,7 @@ class DetailsFunctions {
     Navigator.pop(context);
   }
 
-  static Future<bool> insert(String document, String corporateName, String tradeName, String email, String segment, String store) async {
+  static Future<String?> insert(String document, String corporateName, String tradeName, String email, String segment, String store) async {
       
     final Map<String, dynamic> body = {
       'company': '01',
@@ -43,33 +43,21 @@ class DetailsFunctions {
     };
     var customerService =  CustomerService();
     var res = await customerService.insert(body);
-    print(res);
-    if(res['data'] != null) { return true; }
-    else { return false; }
+    return res['data'] != null ? null :  res['message'];
   }
 
   static Future<List<String>> getEmployer(String document) async {
     try{
-
-    var  employersService =  EmployersService();
-    var res =  await employersService.getEmployer(document);
-    if(res['data'].containsKey('code')){
-      Toaster.show("CNPJ não encontrado.", "warning");
-      
-      return ["CNPJ não encontrado."];
-    }
-    else{
-      String corporateName = res['data']['name'] ?? "";
-      String tradeName =  res['data']['alias'] ?? corporateName;
-      String email = res['data']['email'] ?? "";
-      String stateRegistration = res['data']['sintegra']['home_state_registration'] ?? "ISENTO";
-      Toaster.show("CNPJ encontrado com sucesso", "");
-      return [ corporateName, tradeName, email, stateRegistration ];
-    }
-    } catch(ex){
-      print(ex);
-      Toaster.show("Erro ao buscar por CNPJ.", "warning");
-      return ["Erro ao buscar por CNPJ."]; 
+      var  employersService =  EmployersService();
+      var res =  await employersService.getEmployer(document);
+      if(res['data'].containsKey('code')) { return ["CNPJ não encontrado."]; }
+      else{
+        String corporateName = res['data']['name'] ?? "";
+        String tradeName =  res['data']['alias'] ?? corporateName;
+        String email = res['data']['email'] ?? "";
+        String stateRegistration = res['data']['sintegra']['home_state_registration'] ?? "ISENTO";
+        return [ corporateName, tradeName, email, stateRegistration ];
       }
+      } catch(ex){ return ["Erro ao buscar por CNPJ."];  }
   }
 }
