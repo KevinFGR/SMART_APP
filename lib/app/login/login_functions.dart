@@ -36,6 +36,8 @@ class LoginFunctions {
       var token = res["data"]["token"];
       await TokenService.setToken(token);
       return true;
-    }else{ return false; }
+    }else{ 
+      return false;
+    }
   }
 }

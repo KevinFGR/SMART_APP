@@ -19,6 +19,7 @@ class _DetailsPageState extends State<DetailsPage>{
   final corporateNameController = TextEditingController();
   final tradeNameController = TextEditingController();
   final emailController = TextEditingController();
+  final stateRegistrationController = TextEditingController();
   final storeController = TextEditingController();
   String? selectedSegment;
 
@@ -243,6 +244,34 @@ class _DetailsPageState extends State<DetailsPage>{
                       ),
                     ),
                     
+                    // Inscrição Estadual
+                    const Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Inscrição Estadual',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                    CupertinoTextField(
+                      padding: const EdgeInsets.all(10),
+                      controller: stateRegistrationController,
+                      keyboardType: TextInputType.number,
+                      placeholder: "DIGITE AQUI...",
+                      placeholderStyle: const TextStyle(color:Colors.black38, fontSize:14),
+                      style: const TextStyle(color: Colors.black, fontSize: 14),
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(7),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height:8),
+                    
                     // Loja
                     const Align(
                       alignment: Alignment.centerLeft,
@@ -326,7 +355,7 @@ class _DetailsPageState extends State<DetailsPage>{
             ),
           ),
         ),
-        if(loading) ...{Spinner.showSpinner(Colors.blue)}
+        if(loading) ...{Spinner.show(Colors.blue)}
       ]
       )
     );

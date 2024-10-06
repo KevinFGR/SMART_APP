@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_app/app/components/toaster.dart';
 import 'package:smart_app/services/customers_service.dart';
 import 'package:smart_app/services/employers_service.dart';
 
@@ -28,7 +29,7 @@ class DetailsFunctions {
     final Map<String, dynamic> body = {
       'company': '01',
       'branch': '01',
-      'personType': 'j',
+      'personType': 'J',
       'document': document.replaceAll("/","").replaceAll("-","").replaceAll(".","").replaceAll(" ",""),
       'corporateName': corporateName,
       'tradeName': tradeName,
@@ -53,16 +54,21 @@ class DetailsFunctions {
     var  employersService =  EmployersService();
     var res =  await employersService.getEmployer(document);
     if(res['data'].containsKey('code')){
+      Toaster.show("CNPJ não encontrado.", "warning");
+      
       return ["CNPJ não encontrado."];
     }
     else{
       String corporateName = res['data']['name'] ?? "";
       String tradeName =  res['data']['alias'] ?? corporateName;
       String email = res['data']['email'] ?? "";
-      return [ corporateName, tradeName, email ];
+      String stateRegistration = res['data']['sintegra']['home_state_registration'] ?? "ISENTO";
+      Toaster.show("CNPJ encontrado com sucesso", "");
+      return [ corporateName, tradeName, email, stateRegistration ];
     }
     } catch(ex){
       print(ex);
+      Toaster.show("Erro ao buscar por CNPJ.", "warning");
       return ["Erro ao buscar por CNPJ."]; 
       }
   }

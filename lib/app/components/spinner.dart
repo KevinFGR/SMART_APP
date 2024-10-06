@@ -2,13 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class Spinner {
-  static Widget showSpinner(Color? color) {
-    // return Center(
-    //   child: SpinKitRipple(
-    //     color: color, 
-    //     size: 50.0,
-    //   ),
-    // );
+  static Widget show(Color? color) {
     return Positioned.fill(
       child: Container(
         color: const Color.fromARGB(190, 0, 57, 103),
@@ -21,19 +15,37 @@ class Spinner {
               size: 50.0,
             ),
             const Text("Carregando, Aguarde ...",
-            style: TextStyle(
-              color:Colors.white,
-              fontSize:15,
-              fontWeight: FontWeight.bold,
-              decoration: TextDecoration.none
-            ),)
-
+              style: TextStyle(
+                color:Colors.white,
+                fontSize:15,
+                fontWeight: FontWeight.bold,
+                decoration: TextDecoration.none
+              ),
+            )
             ],
           )
         ),
       ),
     );
-            
   }
-  
+  static Widget login(){
+    return const Center(
+      child: Column(
+        children: [
+          SpinKitRipple(
+            color: Colors.white, 
+            size: 50.0,
+          ),
+          Text("Carregando, Aguarde ...",
+            style: TextStyle(
+              color:Colors.white,
+              fontSize:15,
+              fontWeight: FontWeight.bold,
+              decoration: TextDecoration.none
+            ),
+          )
+        ]
+      )
+    );
+  }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_app/app/components/spinner.dart';
+import 'package:smart_app/app/components/toaster.dart';
 import 'login_functions.dart';
 
 class LoginPage extends StatefulWidget{
@@ -183,11 +184,13 @@ class _LoginPage extends State<LoginPage>{
                     mfaVerification = res; 
                     loading = false; 
                   });
+                  if(!res) Toaster.show("Credenciais não correspondem", "warning");
+                  
                 }
               ),
             ),
-            const SizedBox(height: 30),
-            const Text(
+              const SizedBox(height: 30),
+              const Text(
               "Esqueceu a senha?", 
               style: TextStyle(
                 color: Colors.white60,
@@ -254,16 +257,14 @@ class _LoginPage extends State<LoginPage>{
                       // ignore: use_build_context_synchronously
                       LoginFunctions.navigateToListPage(context);
                     }
-                    else{}
+                    else{ Toaster.show("Credenciais não correspondem", "warning"); }
                     setState(() { loading = false; });
                   }
                 ),
               ),
             ],
           
-            if(loading) ...{
-              Spinner.showSpinner(Colors.cyan[100])
-            }
+            if(loading) ...{ Spinner.login() }
           ],
         ),
       ),
