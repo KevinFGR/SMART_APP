@@ -46,7 +46,7 @@ class _DetailsPageState extends State<DetailsPage>{
         tradeNameController.text = res[1];
         emailController.text = res[2];
         stateRegistrationController.text = res[3];
-      }
+      }else{ Toaster.show(res[0], "warning"); }
       setState(() { loading = false; });
     }
   }
@@ -365,7 +365,7 @@ class _DetailsPageState extends State<DetailsPage>{
             ),
           ),
         ),
-        if(loading) ...{Spinner.show(Colors.blue)}
+        if(loading) ...{Spinner.show()}
       ]
       )
     );
